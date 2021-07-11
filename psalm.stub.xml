@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+  <file src="src/app/models/Model.php">
+    <UndefinedClass occurrences="2">
+      <code>$e</code>
+      <code>PDOException</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/app/models/blog.php">
+    <UndefinedClass occurrences="4">
+      <code>$e</code>
+      <code>$e</code>
+      <code>Exception</code>
+      <code>Exception</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/app/views/blog.php">
+    <UndefinedGlobalVariable occurrences="1">
+      <code>$response</code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="src/app/views/confirm.php">
+    <UndefinedGlobalVariable occurrences="4">
+      <code>$response</code>
+      <code>$response</code>
+      <code>$response</code>
+      <code>$response</code>
+    </UndefinedGlobalVariable>
+  </file>
+</files>
