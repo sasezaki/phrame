@@ -28,7 +28,7 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          tools: composer:v2
+          tools: composer:v2, cs2pr
 
       - name: "Cache dependencies"
         uses: "actions/cache@v2"
@@ -60,4 +60,4 @@ jobs:
       - name: "psalm"
         run: |
           cd src
-          vendor/bin/psalm  --output-format=github --shepherd
+          vendor/bin/psalm --output-format=checkstyle
