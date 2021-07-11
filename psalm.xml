@@ -4,13 +4,13 @@
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    xsi:schemaLocation="https://getpsalm.org/schema/config src/vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm.stub.xml"
 >
     <projectFiles>
-        <directory name="app"/>
+        <directory name="src/app"/>
         <ignoreFiles>
-            <directory name="vendor"/>
+            <directory name="src/vendor"/>
         </ignoreFiles>
     </projectFiles>
 <plugins><pluginClass class="Sfp\Psalm\DontOperationInsideConstructor\Plugin"/></plugins></psalm>
