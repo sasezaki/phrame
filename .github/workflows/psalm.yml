@@ -1,0 +1,63 @@
+name: "Static Analysis by Psalm"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  static-analysis-psalm:
+    name: "Static Analysis by Psalm"
+
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        dependencies:
+          - "locked"
+        php-version:
+          - "7.4"
+        operating-system:
+          - "ubuntu-latest"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          ini-values: memory_limit=-1
+          tools: composer:v2
+
+      - name: "Cache dependencies"
+        uses: "actions/cache@v2"
+        with:
+          path: |
+            ~/.composer/cache
+            src/vendor
+          key: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
+          restore-keys: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
+
+      - name: "Install lowest dependencies"
+        if: ${{ matrix.dependencies == 'lowest' }}
+        run: |
+          cd src
+          composer update --prefer-lowest --no-interaction --no-progress --no-suggest
+
+      - name: "Install highest dependencies"
+        if: ${{ matrix.dependencies == 'highest' }}
+        run: |
+          cd src
+          composer update --no-interaction --no-progress --no-suggest
+
+      - name: "Install locked dependencies"
+        if: ${{ matrix.dependencies == 'locked' }}
+        run: |
+          cd src
+          composer install --no-interaction --no-progress --no-suggest
+
+      - name: "psalm"
+        run: |
+          cd src
+          vendor/bin/psalm  --output-format=github --shepherd
